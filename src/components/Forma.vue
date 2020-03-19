@@ -1,52 +1,57 @@
 <template>
   <div>
-    <h1 class="text-center mt-3">Unesite podatke</h1>
+    <h1 class="text-center formaLogin">Unesite podatke</h1>
     <b-form-group class="forma col-4 offset-4">
       <b-form-group
         class="form-group"
         id="fieldset-1"
         label="Unesite ime države"
         label-for="drzava"
-        :state="state"
+        
       >
-        <b-form-input id="drzava" v-model="drzava" :state="state" trim></b-form-input>
+        <b-form-input id="drzava" v-model="podaci.drzava" trim></b-form-input>
       </b-form-group>
       <b-form-group
         class="form-group"
         id="fieldset-2"
         label="Unesite broj godina"
         label-for="godine"
-        :state="state"
+        
       >
-        <b-form-input type="number" id="godine" v-model="godine" name="godine"></b-form-input>
+        <b-form-input type="number" id="godine" v-model="podaci.godine" name="godine" min="1" max="101"></b-form-input>
       </b-form-group>
       <b-form-group
         class="form-group"
         id="fieldset-3"
         label="Unesite grad"
         label-for="grad"
-        :state="state"
       >
-        <b-form-input id="grad" v-model="grad" trim></b-form-input>
+        <b-form-input id="grad" v-model="podaci.grad" trim></b-form-input>
       </b-form-group>
       <b-form-group class="col-4 offset-4 btn-sacuvaj">
-        <b-button variant="info">Sačuvaj</b-button>
+        <button class="form-control" @click="nastavi">Nastavi</button>
       </b-form-group>
     </b-form-group>
+    
   </div>
 </template>
 
 <script>
 export default {
-  computed: {
-    state() {
-      return this.drzava.length >= 4 ? true : false;
-    }
-  },
   data() {
     return {
-      drzava: ""
+      podaci:{
+              grad:'',
+              drzava: '',
+              godine:1}
     };
+  },
+  methods:{
+    nastavi(){
+      this.$store.state.forma.podaci=this.podaci;
+      console.log(this.$store.state.forma.podaci);
+      this.$router.push('/home');
+    }
   }
 };
 </script>
@@ -62,5 +67,8 @@ body {
 
 .form-group {
   margin-top: 20px;
+}
+.formaLogin{
+  margin-top: 100px;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="fixed-top">
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
         <button
           class="navbar-toggler"
@@ -14,18 +14,18 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <router-link tag="li" to="/#oNama" class="nav-item">
-              <label class="nav-link">O nama</label>
+          <ul class="navbar-nav mr-auto"> 
+            <router-link tag="li" to="/" class="nav-item">        
+              <img src="../assets/logo.png" height="30px;" width="30px;">
+            </router-link> 
+            <router-link tag="li" to="/#statistika" class="nav-item">
+              <label class="nav-link">Statistika</label>
             </router-link>
-            <router-link tag="li" to="/#oNama" class="nav-item">
-              <label class="nav-link">Kursna lista</label>
+            <router-link tag="li" to="/#tabela" class="nav-item">
+              <label class="nav-link">Tabela</label>
             </router-link>
-            <router-link tag="li" to="/#oNama" class="nav-item">
-              <label class="nav-link">Kalkulator</label>
-            </router-link>
-            <router-link tag="li" to="/#oNama" class="nav-item">
-              <label class="nav-link">Kontakt</label>
+            <router-link tag="li" to="/srbija" class="nav-item">
+              <label class="nav-link">Stanje u Srbiji</label>
             </router-link>
           </ul>
         </div>
@@ -60,14 +60,14 @@ export default {
   margin-right: 70px;
 }
 .nav-link {
-  color: white !important;
+  color: #178feb !important;
 }
 label {
   font-size: 0.5cm;
 }
 .navbar {
-  color: white !important;
-  background-color: rgba(36, 35, 35, 0.884);
+  color: #178feb !important;
+  background-color: #abd3df;
   height: 60px;
 }
 .poseta {

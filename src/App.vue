@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <forma></forma>
+    <router-view name='header'></router-view>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -14,6 +15,10 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 export default {
   components: {
     forma: Forma
+  },
+  created(){
+    this.$store.dispatch('get_stats');
+    this.$store.dispatch('vratiVesti');
   }
 };
 </script>
