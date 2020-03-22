@@ -7,8 +7,11 @@ const state={
     statistika:[],
     drzave:[],
     koordinate:null,
+    koordinateSrbija:null,
     vesti:[],
-    domaceVesti:[]
+    domaceVesti:[],
+    informacije:[],
+    izabrani:[]
 }
 
 const mutations={
@@ -21,10 +24,24 @@ const mutations={
         axios
       .get('http://localhost:5000/getStats')
       .then(response => {
+          state.koordinate=null;
+          state.koordinateSrbija=null;
           state.statistika = response.data['Statistika']
         state.statistika.forEach(element => {
             state.drzave.push(element[0]);
         });  
+    })},
+    'GET_SERBIA_STATS'(state){
+        axios
+      .get('http://localhost:5000/getDomaceStats')
+      .then(response => {
+          state.koordinate=null;
+          state.koordinateSrbija = response.data['Statistika']
+          state.koordinateSrbija.forEach(element => {
+              if(element['vrednosti'][0]>0){
+                  state.izabrani.push(element)
+              }
+          });
     })
     },
     'POST_COUNTRY'(state,ele){
@@ -32,6 +49,7 @@ const mutations={
         axios.post('http://localhost:5000/postCountry',{
             drzava:''+ele
         }).then(response=>{
+            state.koordinateSrbija=null;
             state.koordinate=response.data['Koordinate']
             state.statistika.forEach(element => {
                 if(ele==element[0]){
@@ -53,6 +71,12 @@ const mutations={
         .then(response=>{
             state.domaceVesti=response.data['Vesti']
         })
+    },
+    'GET_INFORMACIJE'(state){
+        axios.get('http://localhost:5000/getDomaceInfo')
+        .then(response=>{
+            state.informacije=response.data['Informacije']
+        })
     }
 }
 
@@ -63,6 +87,9 @@ const actions={
     get_stats({commit}){
         commit('GET_STATS');
     },
+    get_Serbia_stats({commit}){
+        commit('GET_SERBIA_STATS');
+    },
     vratiKoordinate({commit},drzava){
         commit('POST_COUNTRY',drzava);
     },
@@ -71,6 +98,9 @@ const actions={
     },
     vratiDomaceVesti({commit}){
         commit('GET_DOMACE_VESTI')
+    },
+    vratiInformacije({commit}){
+        commit('GET_INFORMACIJE')
     }
 }
 

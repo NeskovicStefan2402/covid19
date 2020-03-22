@@ -23,7 +23,9 @@ export default {
         setTimeout(() => {
                 this.odrediParametre();        
         }, 1000);
-        
+        console.log(this.$store.state.forma.koordinate);
+        console.log(this.$store.state.forma.koordinateSrbija);
+    
     }
 }
 </script>

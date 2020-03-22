@@ -24,9 +24,8 @@
             <router-link tag="li" to="/#tabela" class="nav-item">
               <label class="nav-link">Tabela</label>
             </router-link>
-            <router-link tag="li" to="/srbija" class="nav-item">
-              <label class="nav-link">Stanje u Srbiji</label>
-            </router-link>
+              <label class="nav-link" @click="srbijaStats">Stanje u Srbiji</label>
+            
           </ul>
         </div>
       </div>
@@ -48,7 +47,12 @@ export default {
    
   },
   methods: {
-    
+    srbijaStats(){
+      this.$store.dispatch('get_Serbia_stats')
+      this.$store.dispatch('vratiDomaceVesti')
+      this.$store.dispatch('vratiInformacije')
+      this.$router.push('/srbija')  
+    }
   }
 };
 </script>

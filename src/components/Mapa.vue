@@ -1,13 +1,22 @@
 <template>
   <div>
-    <l-map v-if="$store.state.forma.koordinate!=null" :zoom="3" :center="$store.state.forma.koordinate">
+    <l-map v-if="$store.state.forma.koordinate!=null && $store.state.forma.koordinateSrbija==null" :zoom="3" :center="$store.state.forma.koordinate">
       <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
       <l-marker  :lat-lng="$store.state.forma.koordinate" :icon="iconOstali" :visible="true"></l-marker>
       <!-- <l-marker :lat-lng="pocetna" @click="removeMarker(index)" :icon="iconOstali"></l-marker>  -->
     </l-map>
-    <l-map v-else :zoom="zoom" :center="center">
+    <l-map v-if="$store.state.forma.koordinate==null && $store.state.forma.koordinateSrbija!=null" :zoom="6" :center="[44,20]">
       <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+      <l-marker v-for="i in $store.state.forma.izabrani" :lat-lng="[i['koordinate'][0],i['koordinate'][1]]" title="i['naziv']" :icon="iconOstali" :visible="true">
+      </l-marker>
+      <!-- <l-marker :lat-lng="pocetna" @click="removeMarker(index)" :icon="iconOstali"></l-marker>  -->
     </l-map>
+    <!-- <div v-else>
+        <h2>Selektujte drzavu</h2>
+    </div> -->
+    <!-- <l-map v-else :zoom="10" :center="center">
+      <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+    </l-map> -->
   </div>
 </template>
 <script>
